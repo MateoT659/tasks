@@ -9,7 +9,8 @@ function App(): JSX.Element {
             </header>
             <p>
                 Edit <code>src/App.tsx</code> and save. This page will
-                automatically reload. Mateo Torres.
+                automatically reload. This is a website made in CISC275. Mateo
+                Torres.
             </p>
         </div>
     );
