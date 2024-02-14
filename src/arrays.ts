@@ -101,6 +101,7 @@ export function makeMath(addends: number[]): string {
  * previous numbers in the list. If there are no negative numbers, then append
  * the sum to the list.
  *
+ *
  * For instance, the array [1, 9, -5, 7] would become [1, 9, -5, 10, 7]
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
