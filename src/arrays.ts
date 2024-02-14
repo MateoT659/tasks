@@ -35,12 +35,13 @@ export function stringsToIntegers(numbers: string[]): number[] {
  * convert it to 0 instead.
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
+
 export const removeDollars = (amounts: string[]): number[] => {
     return stringsToIntegers(
         amounts.map((str: string): string =>
             str[0] === "$" ? str.substring(1, str.length) : str
         )
-    );
+    ); //i like this one
 };
 
 /**
@@ -49,7 +50,11 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    return messages
+        .filter((str: string): boolean => str.slice(-1) !== "?")
+        .map((str: string): string =>
+            str.slice(-1) === "!" ? str.toUpperCase() : str
+        );
 };
 
 /**
@@ -57,7 +62,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    return words.reduce(
+        (count: number, str: string) => count + (str.length < 4 ? 1 : 0),
+        0
+    );
 }
 
 /**
@@ -66,7 +74,9 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    return colors.every((str: string): boolean =>
+        ["red", "blue", "green"].includes(str)
+    );
 }
 
 /**
@@ -77,7 +87,12 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) return "0=0";
+    return (
+        addends.reduce((sum: number, num: number) => sum + num, 0) +
+        "=" +
+        addends.join("+")
+    );
 }
 
 /**
@@ -90,5 +105,19 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    const indneg: number = values.findIndex((num: number): boolean => num < 0);
+
+    const splicedvalues: number[] = values.slice(
+        0,
+        indneg < 0 ? values.length : indneg
+    );
+
+    const sum: number = splicedvalues.reduce(
+        (sum: number, num: number) => sum + num,
+        0
+    );
+
+    const newvalues: number[] = [...values];
+    newvalues.splice(indneg < 0 ? values.length : indneg + 1, 0, sum);
+    return newvalues;
 }
