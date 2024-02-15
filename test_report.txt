@@ -13,8 +13,8 @@ Browserslist: caniuse-lite is outdated. Please run:
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
 PASS src/functions.test.ts
 PASS src/arrays.test.ts
-PASS src/HtmlCss.test.tsx
 PASS src/text.test.tsx
+PASS src/HtmlCss.test.tsx
 PASS src/App.test.tsx
 --------------|---------|----------|---------|---------|-------------------
 File          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
