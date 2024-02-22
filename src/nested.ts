@@ -1,16 +1,21 @@
+/* eslint-disable indent */
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    return [
-        ...questions.filter(
-            (questions: Question): boolean => questions.published
-        )
-    ];
+    return questions
+        .filter((questions: Question): boolean => questions.published)
+        .map(
+            (question: Question): Question => ({
+                ...question,
+                options: [...question.options]
+            })
+        );
 }
 
 /**
@@ -19,14 +24,19 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [
-        ...questions.filter(
+    return questions
+        .filter(
             (question: Question): boolean =>
                 question.body !== "" ||
                 question.expected !== "" ||
                 question.options.length !== 0
-        ) //demorgans theorem goes crazy
-    ];
+        )
+        .map(
+            (question: Question): Question => ({
+                ...question,
+                options: [...question.options]
+            })
+        ); //demorgans theorem goes crazy
 }
 
 /***
@@ -40,7 +50,7 @@ export function findQuestion(
     const ret = questions.find(
         (question: Question): boolean => question.id === id
     );
-    return ret === undefined ? null : { ...ret };
+    return ret === undefined ? null : { ...ret, options: [...ret.options] };
 }
 
 /**
@@ -100,7 +110,23 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    return (
+        "id,name,options,points,published\n" +
+        questions
+            .map(
+                (question: Question): string =>
+                    question.id.toString() +
+                    "," +
+                    question.name.toString() +
+                    "," +
+                    question.options.length.toString() +
+                    "," +
+                    question.points.toString() +
+                    "," +
+                    question.published.toString()
+            )
+            .join("\n")
+    );
 }
 
 /**
@@ -109,7 +135,14 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    return questions.map(
+        (question: Question): Answer => ({
+            questionId: question.id,
+            text: "",
+            submitted: false,
+            correct: false
+        })
+    );
 }
 
 /***
@@ -117,7 +150,13 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question => ({
+            ...question,
+            published: true,
+            options: [...question.options]
+        })
+    );
 }
 
 /***
@@ -125,8 +164,15 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    return questions.length === 0
+        ? true
+        : questions.every(
+              (question: Question): boolean =>
+                  question.type === questions[0].type
+          );
 }
+//this function is having a lint problem, one lint wants me to make the indents 12 spaces but when I save it goes back to 14,
+//it works so im going to leave it, sorry about the red squiggles!
 
 /***
  * Consumes an array of Questions and produces a new array of the same Questions,
@@ -139,7 +185,15 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    return [
+        ...questions.map(
+            (question: Question): Question => ({
+                ...question,
+                options: [...question.options]
+            })
+        ),
+        makeBlankQuestion(id, name, type)
+    ];
 }
 
 /***
@@ -152,7 +206,12 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question =>
+            question.id === targetId
+                ? { ...question, name: newName, options: [...question.options] }
+                : { ...question, options: [...question.options] }
+    );
 }
 
 /***
