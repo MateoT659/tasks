@@ -92,7 +92,7 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return { ...question, name: newName };
+    return { ...question, name: newName, options: [...question.options] };
 }
 
 /**
@@ -101,7 +101,11 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return { ...question, published: !question.published };
+    return {
+        ...question,
+        published: !question.published,
+        options: [...question.options]
+    };
 }
 
 /**
@@ -116,7 +120,8 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
         ...oldQuestion,
         id: id,
         published: false,
-        name: "Copy of " + oldQuestion.name
+        name: "Copy of " + oldQuestion.name,
+        options: [...oldQuestion.options]
     };
 }
 
@@ -150,6 +155,7 @@ export function mergeQuestion(
         published: false,
         id: id,
         name: name,
-        points: points
+        points: points,
+        options: [...contentQuestion.options]
     };
 }
