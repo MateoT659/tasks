@@ -226,7 +226,19 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question =>
+            question.id === targetId
+                ? {
+                      ...question,
+                      type: newQuestionType,
+                      options:
+                          newQuestionType === "multiple_choice_question"
+                              ? [...question.options]
+                              : []
+                  }
+                : { ...question, options: [...question.options] }
+    );
 }
 
 /**
@@ -245,7 +257,27 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question =>
+            question.id === targetId
+                ? {
+                      ...question,
+                      options:
+                          targetOptionIndex === -1
+                              ? [...question.options, newOption]
+                              : [
+                                    ...question.options.slice(
+                                        0,
+                                        targetOptionIndex
+                                    ),
+                                    newOption,
+                                    ...question.options.slice(
+                                        targetOptionIndex + 1
+                                    )
+                                ]
+                  }
+                : { ...question, options: [...question.options] }
+    );
 }
 
 /***
@@ -259,5 +291,28 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    let duplicate = findQuestion(questions, targetId);
+    if (duplicate === null) {
+        return questions.map(
+            (question: Question): Question => ({
+                ...question,
+                options: [...question.options]
+            })
+        );
+    }
+    duplicate = duplicateQuestion(newId, duplicate);
+    const ret = questions.map(
+        (question: Question): Question => ({
+            ...question,
+            options: [...question.options]
+        })
+    );
+    ret.splice(
+        questions.findIndex(
+            (question: Question): boolean => question.id === targetId
+        ) + 1,
+        0,
+        duplicate
+    );
+    return ret;
 }
