@@ -24,7 +24,7 @@ function MoveableBox({ position }: { position: number }): JSX.Element {
                 border: "1px solid blue",
                 display: "inline-block",
                 verticalAlign: "bottom",
-                marginLeft: "px" + position
+                marginLeft: position + "px"
             }}
         ></div>
     );
