@@ -24,43 +24,7 @@ PASS src/components/CycleHoliday.test.tsx
 PASS src/components/RevealAnswer.test.tsx
 PASS src/components/Counter.test.tsx
 PASS src/bad-components/ColoredBox.test.tsx
-FAIL src/bad-components/ShoveBox.test.tsx
-  ● ShoveBox Component tests › The MoveableBox is initially nearby.
-
-    expect(element).toHaveStyle()
-
-    - Expected
-
-    - marginLeft: 10px;
-
-       9 |     test("The MoveableBox is initially nearby.", () => {
-      10 |         const box = screen.getByTestId("moveable-box");
-    > 11 |         expect(box).toHaveStyle({ marginLeft: "10px" });
-         |                     ^
-      12 |     });
-      13 |     test("There is a button", () => {
-      14 |         expect(screen.getByRole("button")).toBeInTheDocument();
-
-      at Object.<anonymous> (src/bad-components/ShoveBox.test.tsx:11:21)
-
-  ● ShoveBox Component tests › Clicking the button moves the box.
-
-    expect(element).toHaveStyle()
-
-    - Expected
-
-    - marginLeft: 14px;
-
-      17 |         const shoveBox = screen.getByRole("button");
-      18 |         shoveBox.click();
-    > 19 |         expect(screen.getByTestId("moveable-box")).toHaveStyle({
-         |                                                    ^
-      20 |             marginLeft: "14px"
-      21 |         });
-      22 |         shoveBox.click();
-
-      at Object.<anonymous> (src/bad-components/ShoveBox.test.tsx:19:52)
-
+PASS src/bad-components/ShoveBox.test.tsx
 FAIL src/text.test.tsx
   ● renders the text 'Hello World' somewhere
 
@@ -237,7 +201,7 @@ FAIL src/text.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -566,7 +530,7 @@ FAIL src/HtmlCss.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -1060,7 +1024,7 @@ FAIL src/HtmlCss.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -1553,7 +1517,7 @@ FAIL src/HtmlCss.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -2046,7 +2010,7 @@ FAIL src/HtmlCss.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -2539,7 +2503,7 @@ FAIL src/HtmlCss.test.tsx
               [36m</button>[39m
               [36m<div[39m
                 [33mdata-testid[39m=[32m"moveable-box"[39m
-                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom;"[39m
+                [33mstyle[39m=[32m"width: 50px; height: 50px; background-color: lightblue; border: 1px solid blue; display: inline-block; vertical-align: bottom; margin-left: 10px;"[39m
               [36m/>[39m
             [36m</div>[39m
           [36m</div>[39m
@@ -2694,8 +2658,8 @@ All files           |   98.63 |    97.01 |   99.06 |   98.58 |
   answer.ts         |       0 |        0 |       0 |       0 |                   
   question.ts       |       0 |        0 |       0 |       0 |                   
 --------------------|---------|----------|---------|---------|-------------------
-Test Suites: 3 failed, 14 passed, 17 total
-Tests:       8 failed, 110 passed, 118 total
+Test Suites: 2 failed, 15 passed, 17 total
+Tests:       6 failed, 112 passed, 118 total
 Snapshots:   0 total
-Time:        7.79 s
+Time:        7.555 s
 Ran all test suites.
