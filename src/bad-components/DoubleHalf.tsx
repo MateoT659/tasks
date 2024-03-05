@@ -18,10 +18,13 @@ export function DoubleHalf(): JSX.Element {
     const [dhValue, setDhValue] = useState<number>(10);
     return (
         <div>
+            {dhValue}
             <h3>Double Half</h3>
-            <div>The current value is: {dhValue}</div>
-            <Doubler dhValue={dhValue} setDhValue={setDhValue}></Doubler>
-            <Halver dhValue={dhValue} setDhValue={setDhValue}></Halver>
+            <div>
+                The current value is: {dhValue}
+                <Doubler dhValue={dhValue} setDhValue={setDhValue}></Doubler>
+                <Halver dhValue={dhValue} setDhValue={setDhValue}></Halver>
+            </div>
         </div>
     );
 }
